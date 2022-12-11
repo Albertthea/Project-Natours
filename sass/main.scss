@@ -4,6 +4,7 @@ $color-primary-dark: #28b485;
 
 $color-grey-dark: #777;
 $color-white: #fff;
+$color-black: #000;
 
 *,
 *::after,
@@ -39,28 +40,28 @@ body {
     position: relative;
 
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
 
-.header__logo-box {
-    position: absolute;
-    top: 4rem;
-    left: 4rem; /* то откуда отсчитываем */
-}
-
-.header__logo {
-    height: 3.5rem;
-}
-
-/* .logo:hover {
-    animation: moveInRight 1s ease-out;
-} */
-
-.header__text-box {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%); /*чтобы центр бокса был топ и лефт 50%, мы вычитаем 50% от элемента*/
-    text-align: center;
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem; /* то откуда отсчитываем */
+    }
+    
+    &__logo {
+        height: 3.5rem;
+    }
+    
+    /* .logo:hover {
+        animation: moveInRight 1s ease-out;
+    } не помню зачем)*/
+    
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%); /*чтобы центр бокса был топ и лефт 50%, мы вычитаем 50% от элемента*/
+        text-align: center;
+    }
 }
 
 .heading-primary {
@@ -69,30 +70,30 @@ body {
 
     backface-visibility: hidden; /*чтобы не было тряски в конце, а также если есть переворот карточки чтобы юзер не видел оборот карточки*/
     margin-bottom: 6rem;
-}
 
-.heading-primary--main {
-    display: block;
-    font-size: 6rem;
-    font-weight: 400;
-    letter-spacing: 3.5rem;
-
-    animation-name: moveInLeft; /*название анимации*/
-    animation-duration: 1s;
-    animation-timing-function: ease-out; /* с какой скоростью будет анимация*/
-
-    /*     
-    animation-delay: 1s; сколько ждем до начала анимации
-    animation-iteration-count: 3; сколько итераций сделает анимация 
-    */
-}
-
-.heading-primary--sub {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1.75rem;
-    animation: moveInRight 1s ease-out;
+    &--main {
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+    
+        animation-name: moveInLeft; /*название анимации*/
+        animation-duration: 1s;
+        animation-timing-function: ease-out; /* с какой скоростью будет анимация*/
+    
+        /*     
+        animation-delay: 1s; сколько ждем до начала анимации
+        animation-iteration-count: 3; сколько итераций сделает анимация 
+        */
+    }
+    
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+        animation: moveInRight 1s ease-out;
+    }
 }
 
 @keyframes moveInLeft {
@@ -139,8 +140,9 @@ body {
     }
 }
 
-.btn:link,
-.btn:visited {
+.btn {
+    &:link,
+    &:visited {
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.5rem 4rem;
@@ -149,24 +151,33 @@ body {
     transition: all .2s; /*всегда задаем если нужно задать паддинг, ширину*/
     position: relative; /*тогда афтер спрячется за btn*/
     font-size: 1.6rem;
-}
+    }
 
-.btn:hover {
+    &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 1rem 2rem #{'rgba(0, 0, 0 .2)'}; /*сначала значения по х потом у (20px будет вниз); третье значение означает blur*/
-}
+    box-shadow: 0 1rem 2rem rgba($color-black .2); /*сначала значения по х потом у (20px будет вниз); третье значение означает blur*/
 
-.btn:active {
+        &::after {
+        transform: scaleX(1.4) scaleY(1.6); /*увеличивает элемент*/
+        opacity: 0;
+        }
+    }
+
+    &:active {
     transform: translateY(-1px); /*относительно начальной позиции*/
-    box-shadow: 0 .5rem 1rem #{'rgba(0, 0, 0 .2)'}; /*когда актив то меньше шедоу*/
-}
+    box-shadow: 0 .5rem 1rem rgba($color-black .2); /*когда актив то меньше шедоу*/
+    }
 
-.btn--color {
+    &--color {
     background-color: $color-white;
     color: $color-grey-dark;
-}
 
-.btn::after {
+        &::after {
+        background-color: $color-white;
+        }
+    }
+
+    &::after {
     content: "";
     display: inline-block;
     height: 100%; /*относительно btn*/
@@ -177,18 +188,10 @@ body {
     left: 0;
     z-index: -1;
     transition: all .4s;
-}
+    }
 
-.btn--color::after {
-    background-color: $color-white;
-}
-
-.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6); /*увеличивает элемент*/
-    opacity: 0;
-}
-
-.btn--animated {
+    &--animated {
     animation: moveInBottom .5s ease-out .75s; /* через .75s начнется анимация, позже чем остальные*/
     animation-fill-mode: backwards;
+    }
 }
