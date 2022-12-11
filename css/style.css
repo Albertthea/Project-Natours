@@ -174,4 +174,5 @@ body {
 .btn--animated {
   animation: moveInBottom .5s ease-out .75s;
   /* через .75s начнется анимация, позже чем остальные*/
-  animation-fill-mode: backwards; }
+  animation-fill-mode: backwards; 
+}
